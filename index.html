@@ -117,6 +117,7 @@ label{font-weight:800;font-size:.9rem}
 input{width:100%;font:600 1.1rem var(--b);padding:16px 0;margin-top:2px;border:0;border-bottom:3px solid var(--ink);background:transparent;color:var(--ink);border-radius:0;transition:border-color .25s,padding .25s}
 input:focus{outline:0;border-color:var(--red);padding-left:12px}
 form .btn{margin-top:14px}
+.er{color:var(--red);font-weight:800;font-size:.95rem}
 .ok{display:none;font:700 1.8rem/1.1 var(--d);text-transform:uppercase;color:var(--red)}
 form.sent .ok{display:block;animation:fade .6s both}
 form.sent label,form.sent .btn{display:none}
@@ -205,7 +206,9 @@ nav{display:none}
 <form id="f" novalidate>
 <label>Имя<input name="n" autocomplete="given-name" required></label>
 <label>Телефон<input name="t" type="tel" autocomplete="tel" placeholder="+7" required></label>
+<input name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 <button class="btn" type="submit">Записаться на пробную</button>
+<div class="er" id="err" role="alert"></div>
 <div class="ok" role="status">Заявка принята. Позвоним в течение 15 минут.</div>
 </form>
 </div></section>
@@ -258,14 +261,25 @@ addEventListener('scroll',function(){if(!pend){pend=true;requestAnimationFrame(f
 onScroll();
 
 /* form */
-$('#f').addEventListener('submit',function(e){
+$('#f').addEventListener('submit',async function(e){
  e.preventDefault();
- var f=e.target,ok=true;
- [].forEach.call(f.querySelectorAll('input'),function(i){
+ var f=e.target,ok=true,btn=f.querySelector('button'),err=$('#err');
+ err.textContent='';
+ [].forEach.call(f.querySelectorAll('input[required]'),function(i){
   var bad=!i.value.trim()||(i.type==='tel'&&i.value.replace(/\D/g,'').length<10);
   i.style.borderColor=bad?'#e3000f':'';if(bad&&ok){i.focus();ok=false}
  });
- if(ok)f.classList.add('sent');
+ if(!ok)return;
+ var label=btn.textContent;btn.disabled=true;btn.textContent='Отправляем…';
+ try{
+  var r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({name:f.elements.n.value.trim(),phone:f.elements.t.value.trim(),site:f.elements.site.value})});
+  if(!r.ok)throw new Error(r.status);
+  f.classList.add('sent');
+ }catch(x){
+  err.textContent='Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.';
+  btn.disabled=false;btn.textContent=label;
+ }
 });
 })();
 </script>

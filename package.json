@@ -1,0 +1,7 @@
+{
+  "name": "sportgym",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Сайт фитнес-зала SportGym с отправкой заявок в Telegram",
+  "engines": { "node": ">=18" }
+}
