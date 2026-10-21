@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SportGym — фитнес-зал</title>
+<meta name="description" content="SportGym — фитнес-зал на 1 800 м²: силовой зал, кроссфит, бокс, групповые программы и персональные тренировки. Первая тренировка бесплатно.">
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SportGym — фитнес-зал">
+<meta property="og:description" content="Не жди понедельника. Первая тренировка бесплатно.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e3000f;--ink:#000;--paper:#f6f5f2;--mute:#8d8d8d;--d:'Oswald','Arial Narrow',Impact,sans-serif;--b:'Manrope',system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--ink);color:var(--paper);font:400 17px/1.55 var(--b);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{width:min(1240px,100% - 48px);margin:0 auto}
+h1,h2,h3{font-family:var(--d);text-transform:uppercase;line-height:.92;margin:0;font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(2.6rem,7vw,6rem)}
+
+/* header */
+header{position:fixed;inset:0 0 auto;z-index:50;padding:calc(env(safe-area-inset-top,0px) + 14px) 0 14px;transition:background .3s}
+header.s{background:rgba(0,0,0,.92);backdrop-filter:blur(8px)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font:700 1.9rem/1 var(--d);letter-spacing:.02em}
+.logo i{font-style:normal;color:var(--red)}
+nav{display:flex;gap:28px;font-weight:600;font-size:.95rem}
+nav a{position:relative;padding:4px 0}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--red);transform:scaleX(0);transform-origin:right;transition:transform .35s}
+nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.btn{display:inline-block;font:700 1rem/1 var(--b);padding:17px 28px;background:var(--red);color:#fff;border:2px solid var(--red);cursor:pointer;position:relative;overflow:hidden;isolation:isolate;transition:color .35s}
+.btn::before{content:"";position:absolute;inset:0;background:#fff;transform:translateY(101%);transition:transform .35s cubic-bezier(.7,0,.2,1);z-index:-1}
+.btn:hover{color:var(--ink)}.btn:hover::before{transform:none}
+.btn.o{background:transparent;border-color:#fff}
+.btn.o::before{background:var(--red)}.btn.o:hover{color:#fff;border-color:var(--red)}
+header .btn{padding:12px 20px}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:120px 0 80px}
+.plate{position:absolute;right:-14vmin;top:50%;width:92vmin;height:92vmin;margin-top:-46vmin;animation:plateIn 1.6s cubic-bezier(.16,1,.3,1) both}
+.plate svg{width:100%;height:100%;transform:rotate(var(--rot,0deg));will-change:transform}
+@keyframes plateIn{from{transform:translateX(60%) rotate(-200deg) scale(.7);opacity:0}to{transform:none;opacity:1}}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-size:clamp(3.4rem,13.5vw,12.5rem)}
+.ln{display:block;overflow:hidden;padding-bottom:.04em}
+.ln>span{display:block;transform:translateY(105%);animation:up 1s cubic-bezier(.16,1,.3,1) forwards}
+.ln:nth-child(2)>span{animation-delay:.18s}
+@keyframes up{to{transform:none}}
+.out{color:transparent;-webkit-text-stroke:2px #fff}
+.hero p{max-width:34ch;font-size:1.15rem;margin:34px 0 30px;opacity:0;animation:fade .8s .8s forwards}
+.cta{display:flex;flex-wrap:wrap;gap:14px;opacity:0;animation:fade .8s 1s forwards}
+@keyframes fade{to{opacity:1}}
+
+/* marquee */
+.mq{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;transform:rotate(-1.6deg);margin:-26px -20px 0;position:relative;z-index:3;border-block:3px solid #000}
+.mq div{display:inline-flex;animation:mq 22s linear infinite;font:700 clamp(1.6rem,3.6vw,3rem)/1 var(--d);text-transform:uppercase;padding:16px 0}
+.mq span{padding:0 28px}
+.mq:hover div{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* barbell */
+.load{height:420vh;position:relative}
+.stick{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 96px) 0 40px}
+.kg{font:700 clamp(7rem,26vw,22rem)/.8 var(--d);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kg small{font-size:.22em;letter-spacing:0;color:var(--red);margin-left:.15em}
+.caps{position:relative;height:6.5em;max-width:30ch;margin-top:26px}
+.cap{position:absolute;inset:0;font-size:clamp(1.05rem,2vw,1.4rem);font-weight:600;opacity:0;transform:translateY(24px);transition:opacity .45s,transform .45s}
+.cap.on{opacity:1;transform:none}
+.cap b{display:block;font:700 clamp(1.6rem,3vw,2.4rem)/1 var(--d);text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.bar{width:100%;max-height:36svh;margin-top:auto}
+.pl{transform-box:fill-box;transform-origin:center;transform:scaleY(0) scaleX(.2);opacity:0;transition:transform .6s cubic-bezier(.34,1.56,.64,1),opacity .3s}
+.pl.on{transform:none;opacity:1}
+
+/* directions */
+.dir{background:var(--paper);color:var(--ink);padding:120px 0 100px}
+.dir h2{margin-bottom:56px;max-width:11ch}
+.row{position:relative;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;padding:30px 12px;border-top:2px solid var(--ink);overflow:hidden;isolation:isolate;transition:color .35s}
+.row:last-child{border-bottom:2px solid var(--ink)}
+.row::before{content:"";position:absolute;inset:0;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.7,0,.2,1);z-index:-1}
+.row h3{font-size:clamp(2rem,5vw,4.2rem);transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.row p{margin:0;max-width:42ch;font-weight:600}
+.row:hover,.row:focus-visible{color:#fff}
+.row:hover::before,.row:focus-visible::before{transform:none}
+.row:hover h3,.row:focus-visible h3{transform:translateX(18px)}
+
+/* prices */
+.price{padding:120px 0}
+.price h2{margin-bottom:56px}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);border:2px solid #fff}
+.plan{padding:40px 32px 36px;display:flex;flex-direction:column;gap:18px;transition:background .3s}
+.plan+.plan{border-left:2px solid #fff}
+.plan:hover{background:#161616}
+.plan.hot{background:var(--red)}.plan.hot:hover{background:#c8000d}
+.plan h3{font-size:2rem}
+.pr{font:700 clamp(3rem,5vw,4.6rem)/1 var(--d)}
+.pr small{font:600 1rem var(--b);opacity:.7;margin-left:6px}
+.plan ul{list-style:none;padding:0;margin:0 0 14px;display:grid;gap:10px;flex:1}
+.plan li{padding-left:22px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:3px;background:currentColor}
+.plan .btn{text-align:center}
+.plan.hot .btn{background:#fff;color:var(--ink);border-color:#fff}
+.plan.hot .btn::before{background:var(--ink)}.plan.hot .btn:hover{color:#fff}
+
+/* join */
+.join{background:var(--paper);color:var(--ink);padding:110px 0}
+.join .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:end}
+form{display:grid;gap:14px}
+label{font-weight:800;font-size:.9rem}
+input{width:100%;font:600 1.1rem var(--b);padding:16px 0;margin-top:2px;border:0;border-bottom:3px solid var(--ink);background:transparent;color:var(--ink);border-radius:0;transition:border-color .25s,padding .25s}
+input:focus{outline:0;border-color:var(--red);padding-left:12px}
+form .btn{margin-top:14px}
+.ok{display:none;font:700 1.8rem/1.1 var(--d);text-transform:uppercase;color:var(--red)}
+form.sent .ok{display:block;animation:fade .6s both}
+form.sent label,form.sent .btn{display:none}
+
+footer{padding:56px 0 calc(env(safe-area-inset-bottom,0px) + 40px)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;align-items:flex-end}
+footer p{margin:0;color:var(--mute)}
+.big{font:700 clamp(4rem,17vw,15rem)/.8 var(--d);text-transform:uppercase;width:100%;margin-top:30px}
+.big i{font-style:normal;color:var(--red)}
+
+@media(max-width:820px){
+nav{display:none}
+.row,.join .wrap{grid-template-columns:1fr}
+.plans{grid-template-columns:1fr}.plan+.plan{border-left:0;border-top:2px solid #fff}
+.plate{right:-38vmin;opacity:.55!important}
+.out{-webkit-text-stroke-width:1.5px}
+.caps{height:8em}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+.mq div{animation:none}
+}
+</style>
+</head>
+<body>
+<header id="hd"><div class="wrap">
+<a href="#top" class="logo" aria-label="SportGym">SPORT<i>GYM</i></a>
+<nav><a href="#load">О зале</a><a href="#dir">Направления</a><a href="#price">Тарифы</a><a href="#join">Контакты</a></nav>
+<a href="#join" class="btn">Записаться</a>
+</div></header>
+
+<main id="top">
+<section class="hero">
+<div class="plate" aria-hidden="true">
+<svg viewBox="-200 -200 400 400" id="pl"><defs><path id="ring" d="M0-132a132 132 0 1 1 0 264a132 132 0 1 1 0-264"/></defs>
+<circle r="198" fill="#e3000f"/><circle r="176" fill="none" stroke="#000" stroke-width="4"/><circle r="92" fill="none" stroke="#000" stroke-width="4"/>
+<circle r="40" fill="#000"/><circle r="16" fill="#e3000f"/>
+<text font-family="Oswald,Impact,sans-serif" font-weight="700" font-size="30" fill="#fff" letter-spacing="3"><textPath href="#ring">SPORTGYM 25 KG — SPORTGYM 25 KG — SPORTGYM 25 KG —</textPath></text></svg>
+</div>
+<div class="wrap">
+<h1><span class="ln"><span>Не жди</span></span><span class="ln"><span class="out">понедельника</span></span></h1>
+<p>SportGym — зал на 1 800 м². Свободные веса, кроссфит, ринг и тренеры, которые не дадут сачковать. Открыто с 6:00 до 24:00.</p>
+<div class="cta"><a href="#join" class="btn">Первая тренировка бесплатно</a><a href="#price" class="btn o">Смотреть тарифы</a></div>
+</div>
+</section>
+
+<div class="mq" aria-hidden="true"><div>
+<span>Железо</span><span>/</span><span>Пот</span><span>/</span><span>Результат</span><span>/</span><span>Ещё подход</span><span>/</span>
+<span>Железо</span><span>/</span><span>Пот</span><span>/</span><span>Результат</span><span>/</span><span>Ещё подход</span><span>/</span>
+</div></div>
+
+<section class="load" id="load">
+<div class="stick"><div class="wrap">
+<div class="kg"><span id="kg">20</span><small>кг</small></div>
+<div class="caps" id="caps">
+<div class="cap on"><b>Пустой гриф</b>Всё начинается с того, что ты пришёл. Первая тренировка у нас бесплатна.</div>
+<div class="cap"><b>Добавь вес</b>1 800 м² и 90 тренажёров. Очередей к стойкам нет даже вечером.</div>
+<div class="cap"><b>Не один</b>18 тренеров соберут программу под твою цель и проверят технику.</div>
+<div class="cap"><b>Без лишнего</b>Душевые, сауна и раздевалки с большими шкафами входят в абонемент.</div>
+<div class="cap"><b>Рекорд</b>160 килограммов на штанге. Какой будет твоя цифра?</div>
+</div></div>
+<svg class="bar" id="bar" viewBox="0 0 800 340" aria-hidden="true"><rect x="20" y="166" width="760" height="8" fill="#9a9a9a"/><rect x="336" y="150" width="12" height="40" fill="#ddd"/><rect x="452" y="150" width="12" height="40" fill="#ddd"/></svg>
+</div>
+</section>
+
+<section class="dir" id="dir"><div class="wrap">
+<h2>Выбери свою нагрузку</h2>
+<a class="row" href="#join"><h3>Силовой зал</h3><p>Стойки, платформы, гантели до 60 кг и тренажёры Technogym.</p></a>
+<a class="row" href="#join"><h3>Кроссфит</h3><p>Тренировка дня с тренером. Группа до 12 человек, масштабирование под любой уровень.</p></a>
+<a class="row" href="#join"><h3>Бокс</h3><p>Ринг, мешки и лапы. Для новичков и для тех, кто выходит на спарринги.</p></a>
+<a class="row" href="#join"><h3>Групповые</h3><p>Функциональный тренинг, силовая аэробика и сайкл. 40 занятий в неделю.</p></a>
+<a class="row" href="#join"><h3>Персональные</h3><p>Один на один: техника, набор массы или сушка, возвращение после перерыва.</p></a>
+<a class="row" href="#join"><h3>Мобильность</h3><p>Растяжка и восстановление, чтобы тяжёлые недели не заканчивались травмой.</p></a>
+</div></section>
+
+<section class="price" id="price"><div class="wrap">
+<h2>Сколько стоит начать</h2>
+<div class="plans">
+<div class="plan"><h3>Месяц</h3><div class="pr">3 900 ₽</div><ul><li>Зал и групповые занятия</li><li>Душевые и сауна</li><li>Заморозка до 7 дней</li></ul><a href="#join" class="btn">Выбрать месяц</a></div>
+<div class="plan hot"><h3>Три месяца</h3><div class="pr">9 900 ₽<small>3 300 ₽ в месяц</small></div><ul><li>Всё из тарифа «Месяц»</li><li>2 персональные тренировки</li><li>Замеры и программа от тренера</li><li>Заморозка до 14 дней</li></ul><a href="#join" class="btn">Выбрать три месяца</a></div>
+<div class="plan"><h3>Год</h3><div class="pr">29 900 ₽<small>2 490 ₽ в месяц</small></div><ul><li>Всё из тарифа «Три месяца»</li><li>6 персональных тренировок</li><li>Гостевые визиты для друга</li><li>Заморозка до 30 дней</li></ul><a href="#join" class="btn">Выбрать год</a></div>
+</div></div></section>
+
+<section class="join" id="join"><div class="wrap">
+<div><h2>Первая тренировка бесплатно</h2><p style="max-width:38ch;font-weight:600;margin:24px 0 0">Оставь номер, и мы подберём время. Приходи в удобной обуви, всё остальное выдадим.</p></div>
+<form id="f" novalidate>
+<label>Имя<input name="n" autocomplete="given-name" required></label>
+<label>Телефон<input name="t" type="tel" autocomplete="tel" placeholder="+7" required></label>
+<button class="btn" type="submit">Записаться на пробную</button>
+<div class="ok" role="status">Заявка принята. Позвоним в течение 15 минут.</div>
+</form>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+<p>ул. Спортивная, 12<br>Ежедневно 6:00 — 24:00</p>
+<p>+7 (900) 000-00-00<br>hello@sportgym.example</p>
+<div class="big" aria-hidden="true">Sport<i>Gym</i></div>
+</div></footer>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)},
+hd=$('#hd'),pl=$('#pl'),sec=$('#load'),kgEl=$('#kg'),bar=$('#bar'),
+caps=[].slice.call(document.querySelectorAll('.cap')),
+reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* plates: 4 per side, biggest inside */
+var H=[300,250,200,150],C=['#e3000f','#f6f5f2','#f6f5f2','#9a9a9a'],W=30,G=[],NS='http://www.w3.org/2000/svg';
+for(var i=0;i<4;i++)for(var s=0;s<2;s++){
+ var x=s?464+i*(W+6):336-(i+1)*W-i*6,r=document.createElementNS(NS,'rect');
+ r.setAttribute('x',x);r.setAttribute('y',170-H[i]/2);r.setAttribute('width',W);r.setAttribute('height',H[i]);
+ r.setAttribute('rx',4);r.setAttribute('fill',C[i]);r.setAttribute('class','pl');
+ r.style.transitionDelay=(s*.08)+'s';r.dataset.i=i;bar.appendChild(r);G.push(r);
+}
+var KG=[20,70,110,140,160],stage=0,cur=20,tgt=20,raf=0;
+
+function tick(){
+ cur+=(tgt-cur)*.14;
+ if(Math.abs(tgt-cur)<.5)cur=tgt;
+ kgEl.textContent=Math.round(cur);
+ raf=cur===tgt?0:requestAnimationFrame(tick);
+}
+function onScroll(){
+ var y=scrollY;
+ hd.classList.toggle('s',y>40);
+ if(!reduce)pl.style.setProperty('--rot',(y*.12)+'deg');
+ var r=sec.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/(sec.offsetHeight-innerHeight)));
+ var st=Math.min(4,Math.floor(p*5));
+ if(st!==stage){
+  stage=st;tgt=KG[st];
+  G.forEach(function(g){g.classList.toggle('on',+g.dataset.i<st)});
+  caps.forEach(function(c,i){c.classList.toggle('on',i===st)});
+  if(!raf)raf=requestAnimationFrame(tick);
+ }
+}
+var pend=false;
+addEventListener('scroll',function(){if(!pend){pend=true;requestAnimationFrame(function(){pend=false;onScroll()})}},{passive:true});
+onScroll();
+
+/* form */
+$('#f').addEventListener('submit',function(e){
+ e.preventDefault();
+ var f=e.target,ok=true;
+ [].forEach.call(f.querySelectorAll('input'),function(i){
+  var bad=!i.value.trim()||(i.type==='tel'&&i.value.replace(/\D/g,'').length<10);
+  i.style.borderColor=bad?'#e3000f':'';if(bad&&ok){i.focus();ok=false}
+ });
+ if(ok)f.classList.add('sent');
+});
+})();
+</script>
+</body>
+</html>
